@@ -1,0 +1,54 @@
+<%= turbo_frame_tag params[:attribute] do %>
+<%= form_with(model: customer, url: [customer, attribute: params[:attribute]], method: :patch) do |form| %>
+  <% if customer.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+        <% customer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if params[:attribute].eql? 'first_name' %>
+  <div>
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name, onchange: 'this.form.requestSubmit()' %>
+  </div>
+  <% end %>
+
+  <% if params[:attribute].eql? 'last_name' %>
+  <div>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name, onchange: 'this.form.requestSubmit()' %>
+  </div>
+  <% end %>
+
+  <% if params[:attribute].eql? 'dob' %>
+  <div>
+    <%= form.label :dob, style: "display: block" %>
+    <%= form.datetime_field :dob, onchange: 'this.form.requestSubmit()' %>
+  </div>
+  <% end %>
+
+  <% if params[:attribute].eql? 'tel' %>
+  <div>
+    <%= form.label :tel, style: "display: block" %>
+    <%= form.number_field :tel, onchange: 'this.form.requestSubmit()' %>
+  </div>
+  <% end %>
+
+  <% if params[:attribute].eql? 'description' %>
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description, onchange: 'this.form.requestSubmit()' %>
+  </div>
+  <% end %>
+
+  <div>
+    <%#= form.submit %>
+  </div>
+<% end %>
+  <% end %>

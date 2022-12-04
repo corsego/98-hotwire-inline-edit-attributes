@@ -1,27 +1,10 @@
 <div id="<%= dom_id customer %>">
-  <p>
-    <strong>First name:</strong>
-    <%= customer.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= customer.last_name %>
-  </p>
-
-  <p>
-    <strong>Dob:</strong>
-    <%= customer.dob %>
-  </p>
-
-  <p>
-    <strong>Tel:</strong>
-    <%= customer.tel %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= customer.description %>
-  </p>
-
+  <% Customer::EDITABLE_ATTRS.each do |attribute| %>
+    <%= turbo_frame_tag attribute do %>
+    <p>
+      <strong><%= attribute %>:</strong>
+      <%= link_to (customer[attribute].presence || 'Edit'), [:edit, customer, attribute: attribute] %>
+    </p>
+    <% end %>
+  <% end %>
 </div>

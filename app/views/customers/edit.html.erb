@@ -1,7 +1,10 @@
 <h1>Editing customer</h1>
 
-<%= render "form", customer: @customer %>
-
+<% if params[:attribute].present? %>
+  <%= render "inline_attribute_form", customer: @customer %>
+<% else %>
+  <%= render "form", customer: @customer %>
+<% end %>
 <br>
 
 <div>
